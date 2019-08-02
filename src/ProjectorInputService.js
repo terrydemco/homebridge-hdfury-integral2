@@ -61,7 +61,8 @@ class ProjectorInputService {
   async _changeInput(c, value, callback) {
     this.log(`Set Integral2 input source to ${c.source}`);
     try {
-      //value = (c.source.toString(16)).substr(-2);
+      value = (c.source.toString(16)).substr(-2);
+      this.log(`value:: ${value}`);
       const cmd = `#set input ${c.source}`;
 
       this.log(`Sending ${cmd}`);
