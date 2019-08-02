@@ -37,8 +37,8 @@ class ProjectorInputService {
 		const source = status;
       if (source !== this._lastKnownSource) {
         this._updateSource(this._lastKnownSource, false);
-        if (source == 'input top') this._updateSource('switch', true);
-        else if (source == 'input bottom') this._updateSource('switch', false);
+        if (source == 'input top') this._updateSource('Switch', true);
+        else if (source == 'input bottom') this._updateSource('Switch', false);
 
         this._lastKnownSource = source;
       }
@@ -62,7 +62,7 @@ class ProjectorInputService {
     this.log(`Set Integral2 input source to ${c.source}`);
     try {
       //value = (c.source.toString(16)).substr(-2);
-      //this.log(`value:: ${value}`);
+      this.log(`setting value:: ${value}`);
       const cmd = `#set input ${c.source}`;
 
       this.log(`Sending ${cmd}`);
