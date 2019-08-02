@@ -103,12 +103,11 @@ class ProjectorAccessory {
 
   async _refreshPowerStatus() {
     const powerState = await this._device.execute('#get input');
-    const matches = powerRegex.exec(powerState);
-    if (matches === null) {
-      throw new Error('Failed to process #get ver response');
+    if (powerState === null) {
+      throw new Error('Failed to process #get input response');
     }
 
-    return matches[1];
+    return powerState;
   }
 
   _onDisconnected() {
