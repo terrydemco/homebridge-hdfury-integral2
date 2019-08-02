@@ -71,6 +71,7 @@ class ProjectorAccessory {
 
   async _onConnected() {
     this.log('Connected. Refreshing characteristics.');
+    console.log('Connected. Refreshing characteristics.');
     await this._refreshSerialNumber();
     await this._refreshProjectorStatus();
 
@@ -90,7 +91,8 @@ class ProjectorAccessory {
     }
     catch (e) {
       // Do not leak the exception
-      this.log(`Failed to refresh projector status: ${e}`);
+      this.log(`Failed to refresh status: ${e}`);
+      console.log(`failed to refresh status ${e}`);
     }
 
     // Schedule another update
