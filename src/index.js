@@ -33,7 +33,6 @@ const EpsonProjectorPlatform = class {
   constructor(log, config, api) {
     this.log = log;
     this.log(`HDFury Integral2 Platform Plugin Loaded - Version ${version}`);
-    console.log('test');
     this.config = config;
     this.api = api;
 

@@ -97,14 +97,14 @@ class Transport extends EventEmitter {
 
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
-        debug(`Begin processing command ${commandId} - attempt #${attempt}`);
+        this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
         const timeoutPromise = this._createTimeout(timeout);
         const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
 
         response = await Promise.race([readPromise, timeoutPromise]);
         if (response === null) {
-          debug('Command execution timed out.');
+          this.log('Command execution timed out.');
           this._synchronize();
         }
       }
@@ -179,18 +179,18 @@ class Transport extends EventEmitter {
   }
 
   _onConnecting() {
-    debug('Connecting to projector...');
+    this.log('Connecting to projector...');
   }
 
   _onConnected() {
-    debug('Connected to projector...');
+    this.log('Connected to projector...');
     this._backoff.reset();
 
     // TODO: Initiate connection check timer?
   }
 
   _onDisconnected() {
-    debug('Disconnected from projector...');
+    this.log('Disconnected from projector...');
     this._backoff.backoff();
   }
 
