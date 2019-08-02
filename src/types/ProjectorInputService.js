@@ -12,7 +12,7 @@ module.exports = {
     // TOP Input Characteristic
     ////////////////////////////////////////////////////////////////////////////
     Characteristic.Switch = function () {
-      Characteristic.call(this, 'Switch', Characteristic.Switch.UUID);
+      Characteristic.call(this, 'TopInput', Characteristic.Switch.UUID);
 
       const props = {
         format: Characteristic.Formats.BOOL,
