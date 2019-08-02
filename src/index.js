@@ -53,10 +53,10 @@ mySwitch.prototype = {
     this.informationService = informationService;
     this.switchService = switchService;
     return [informationService, switchService];
-	}
+	},
 	
 	getSwitchOnCharacteristic: function (next) {
-	}
+	},
 	setSwitchOnCharacteristic: function (on, next) {
 	}
 
