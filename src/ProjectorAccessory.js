@@ -105,9 +105,10 @@ class ProjectorAccessory {
     const powerState = await this._device.execute('#get input');
     if (powerState === null) {
       throw new Error('Failed to process #get input response');
+      return false;
     }
 
-    return powerState;
+    return true;
   }
 
   _onDisconnected() {
