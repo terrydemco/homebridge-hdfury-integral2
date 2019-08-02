@@ -16,16 +16,13 @@ class ProjectorAccessory {
     Service = this.api.hap.Service;
 
     this.log = log;
-    this.log('projector accessory constructor');
     this.config = config;
     this.name = config.name;
 
     this.config.pollingInterval = this.config.pollingInterval || 60000;
 
     this._isReachable = false;
-	this.log('creating new transport');
     this._device = new Transport(this.config.port);
-    this.log('transport created');
     this._device.on('connected', this._onConnected.bind(this));
     this._device.on('disconnected', this._onDisconnected.bind(this));
 
@@ -42,7 +39,7 @@ class ProjectorAccessory {
     return [
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),
-      this.getProjectorInputService(),
+      this.getProjectorInputService()
     ];
   }
 
