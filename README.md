@@ -68,17 +68,6 @@ This platform and the switches it creates have been verified to work with the fo
 * Elgato Eve
 
 
-## Contributing
-
-You can contribute to this homebridge plugin in following ways:
-
-- [Report issues](https://github.com/grover/homebridge-epson-projector/issues) and help verify fixes as they are checked in.
-- Review the [source code changes](https://github.com/grover/homebridge-epson-projector/pulls).
-- Contribute bug fixes.
-- Contribute changes to extend support to other Epson projectors
-
-Pull requests are accepted.
-
 ## License
 
 MIT License
