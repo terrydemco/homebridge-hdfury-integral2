@@ -1,6 +1,7 @@
 # homebridge-epson-projector
 
-A homebridge plugin to control [Epson EH-TW7200 LCD projectors](https://www.epson.de/products/projectors/home-cinema/epson-eh-tw7200) connected via an RS-232 serial interface. This plugin enables the integration of the projector in HomeKit automations, create rules and scenes that depend upon the state of the projector, and enables scenes to control the TW7200 projector.
+A homebridge plugin reworked to control HDFury Integral2 via RS-232.
+In development, not currently working
 
 ## Status
 
@@ -9,21 +10,6 @@ A homebridge plugin to control [Epson EH-TW7200 LCD projectors](https://www.epso
 [![Node version](https://img.shields.io/node/v/homebridge-epson-projector-rs232.svg?style=flat)](http://nodejs.org/download/)
 [![NPM Version](https://badge.fury.io/js/homebridge-epson-projector-rs232.svg?style=flat)](https://npmjs.org/package/homebridge-epson-projector-rs232)
 
-## Supported Epson projectors
-
-Epson projectors that have a RS-232 interface are likely to implement the [ESC/VP21 protocol](https://www.google.de/search?q=ESC/VP21+protocol) that is used by this plugin. While the feature set exposed on the interface differs in the projectors, basic functionality should work in almost all of them. Specifically this plugin is compatible with the following models:
-
-* EH-TW7200
-* EH-TW8200  (not verified)
-* EH-TW8200W (not verified)
-* EH-TW9200 (not verified)
-* EH-TW9200W (not verified)
-* PL-HomeCinema 5030UB (not verified)
-* PL-HomeCinema 5030UBe (not verified)
-* PL-HomeCinema 6030UB (not verified)
-* PL-HomeCinema 4030 (not verified)
-
-The above models share the same set of commands that are used by this plugin. Other models not on the list might be compatible to a certain extent, see [Contributing](#Contributing) for more.
 
 ## Installation instructions
 
@@ -40,10 +26,10 @@ After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
   },
   "platforms": [
     {
-      "platform": "EpsonProjector",
+      "platform": "HDFury",
       "devices": [
         {
-          "name": "Epson EH-TW7200",
+          "name": "Integral2",
           "port": "/dev/serial0",
           "pollingInterval": 60000
         }
@@ -81,16 +67,6 @@ This platform and the switches it creates have been verified to work with the fo
 * Home (only the Power switch is available in the Home app, all other services are `Not supported`.)
 * Elgato Eve
 
-## Some asks for friendly gestures
-
-If you use this and like it - please leave a note by staring this package here or on GitHub.
-
-If you use it and have a problem, file an issue at [GitHub](https://github.com/grover/homebridge-epson-projector/issues) - I'll try to help.
-
-If you tried this, but don't like it: tell me about it in an issue too. I'll try my best
-to address these in my spare time.
-
-If you fork this, go ahead - I'll accept pull requests for enhancements.
 
 ## Contributing
 
