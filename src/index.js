@@ -32,7 +32,7 @@ module.exports = (homebridge) => {
 const EpsonProjectorPlatform = class {
   constructor(log, config, api) {
     this.log = log;
-    this.log(`TD HDFury Integral2 Platform Plugin Loaded - Version ${version}`);
+    this.log(`HDFury Integral2 Platform Plugin Loaded - Version ${version}`);
     this.config = config;
     this.api = api;
 

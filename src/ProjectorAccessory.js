@@ -11,6 +11,7 @@ const powerRegex = /PWR=([0-9]+)/;
 class ProjectorAccessory {
 
   constructor(api, log, config) {
+    this.log('projector accessory constructor');
     this.api = api;
     Characteristic = this.api.hap.Characteristic;
     Service = this.api.hap.Service;
@@ -22,12 +23,14 @@ class ProjectorAccessory {
     this.config.pollingInterval = this.config.pollingInterval || 60000;
 
     this._isReachable = false;
-
+	this.log('creating new transport');
     this._device = new Transport(this.config.port);
+    this.log('transport created');
     this._device.on('connected', this._onConnected.bind(this));
     this._device.on('disconnected', this._onDisconnected.bind(this));
 
     this._services = this.createServices();
+    console.log('services created');
   }
 
   getServices() {
@@ -35,6 +38,7 @@ class ProjectorAccessory {
   }
 
   createServices() {
+  this.log('creating services');
     return [
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),
