@@ -31,8 +31,7 @@ module.exports = (homebridge) => {
 
 function mySwitch(log, config) {
   this.log = log;
-  this.getUrl = url.parse(config['getUrl']);
-  this.postUrl = url.parse(config['postUrl']);
+
 }
 
 mySwitch.prototype = {
