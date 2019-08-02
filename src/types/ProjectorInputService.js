@@ -11,7 +11,7 @@ module.exports = {
     ////////////////////////////////////////////////////////////////////////////
     // TOP Input Characteristic
     ////////////////////////////////////////////////////////////////////////////
-    Characteristic.TopInput = function () {
+    Characteristic.Switch = function () {
       Characteristic.call(this, 'Switch', Characteristic.Switch.UUID);
 
       const props = {
