@@ -76,11 +76,11 @@ class ProjectorAccessory {
       .on('set', this.setSwitchOnCharacteristic.bind(this));
   }
   
-    getSwitchOnCharacteristic: function () {
+    getSwitchOnCharacteristic() {
 
   }
 
-  setSwitchOnCharacteristic: function (value) {
+  setSwitchOnCharacteristic(value) {
         this.log(`Set Integral2 input source to ${value}`);
     try {
       value = value === true ? 'top' : 'bot';
