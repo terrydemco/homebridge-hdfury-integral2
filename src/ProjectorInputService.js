@@ -38,7 +38,7 @@ class ProjectorInputService {
       if (source !== this._lastKnownSource) {
         this._updateSource(this._lastKnownSource, false);
         if (source == 'input top') this._updateSource('TopInput', true);
-        else if (source == 'input bottom') this._updateSource('TopInput', false);
+        else if (source == 'input bot') this._updateSource('TopInput', false);
 
         this._lastKnownSource = source;
       }
