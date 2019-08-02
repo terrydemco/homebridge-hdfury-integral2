@@ -78,7 +78,7 @@ class ProjectorAccessory {
   
     getSwitchOnCharacteristic: function () {
 
-  },
+  }
 
   setSwitchOnCharacteristic: function (value) {
         this.log(`Set Integral2 input source to ${value}`);
