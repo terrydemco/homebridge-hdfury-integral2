@@ -109,7 +109,8 @@ class ProjectorAccessory {
     const powerState = await this._device.execute('#get ver');
     const matches = powerRegex.exec(powerState);
     if (matches === null) {
-      throw new Error('Failed to process #get ver response');
+      //throw new Error('Failed to process #get ver response');
+      this.log('failed to process #get ver response');
     }
 
     return matches[1];
