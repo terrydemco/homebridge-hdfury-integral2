@@ -98,7 +98,6 @@ class Transport extends EventEmitter {
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
         this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
-        this.log(`command: ${cmd}`);
         const timeoutPromise = this._createTimeout(timeout);
         const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
@@ -106,14 +105,15 @@ class Transport extends EventEmitter {
         response = await Promise.race([readPromise, timeoutPromise]);
         if (response === null) {
           this.log('Command execution timed out.');
-          this._synchronize();
+          //this._synchronize();
         }
       }
 
 
       this.log(`Done processing command ${commandId}: response=${JSON.stringify(response)}`);
       if (response === null) {
-        throw new Error('Command execution timed out.');
+        //throw new Error('Command execution timed out.');
+        this.log('ERROR: Command execution timed out.');
       }
       if (response.startsWith('ERR\r:')) {
         throw new Error('Unsupported command');
