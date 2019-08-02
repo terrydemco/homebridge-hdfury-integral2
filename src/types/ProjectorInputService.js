@@ -22,7 +22,7 @@ module.exports = {
       this.setProps(props);
       this.value = this.getDefaultValue();
     };
-    Characteristic.TopInput.UUID = '97C11EAC-68A6-45FA-9C6B-7B01F84CA6A2';
+    Characteristic.Switch.UUID = '97C11EAC-68A6-45FA-9C6B-7B01F84CA6A2';
     inherits(Characteristic.Switch, Characteristic);
 
 
