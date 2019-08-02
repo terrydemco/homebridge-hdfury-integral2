@@ -107,7 +107,7 @@ class Transport extends EventEmitter {
       }
 
 
-      this.log(`Done processing command ${commandId}: response=${JSON.stringify(response)}`);
+      this.log(`Done processing command ${commandId}: response=${response}`);
       if (response === null) {
         throw new Error('Command execution timed out.');
         //this._synchronize();
