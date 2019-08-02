@@ -12,8 +12,7 @@ class ProjectorInputService {
     Characteristic = api.hap.Characteristic;
 
     this._characteristics = [
-      { source: 'top', characteristic: Characteristic.TopInput },
-      { source: 'bot', characteristic: Characteristic.BottomInput }
+      { source: 'switch', characteristic: Characteristic.Switch },
     ];
     this._service = new api.hap.Service.ProjectorInputService(name);
     for (let c of this._characteristics) {
@@ -32,10 +31,10 @@ class ProjectorInputService {
   	this.log('projector async update');
     const status = await this._device.execute('#get input');
     this.log(`received input ${status}`);
-    const matches = this._sourceRegex.exec(status);
-    if (matches !== null) {
-      let source = Number.parseInt(matches[1], 16) & 0xF0;
-
+    //const matches = this._sourceRegex.exec(status);
+    if (status === 'top' || status === 'bot') {
+      
+		const source = status;
       if (source !== this._lastKnownSource) {
         this._updateSource(this._lastKnownSource, false);
         this._updateSource(source, true);
@@ -61,8 +60,8 @@ class ProjectorInputService {
   async _changeInput(c, value, callback) {
     this.log(`Set Integral2 input source to ${c.source}`);
     try {
-      value = (c.source.toString(16)).substr(-2);
-      this.log(`value:: ${value}`);
+      //value = (c.source.toString(16)).substr(-2);
+      //this.log(`value:: ${value}`);
       const cmd = `#set input ${c.source}`;
 
       this.log(`Sending ${cmd}`);
