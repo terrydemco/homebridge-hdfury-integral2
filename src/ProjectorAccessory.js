@@ -11,12 +11,12 @@ const powerRegex = /PWR=([0-9]+)/;
 class ProjectorAccessory {
 
   constructor(api, log, config) {
-    this.log('projector accessory constructor');
     this.api = api;
     Characteristic = this.api.hap.Characteristic;
     Service = this.api.hap.Service;
 
     this.log = log;
+    this.log('projector accessory constructor');
     this.config = config;
     this.name = config.name;
 
