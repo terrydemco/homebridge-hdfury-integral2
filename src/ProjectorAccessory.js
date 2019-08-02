@@ -27,7 +27,6 @@ class ProjectorAccessory {
     this._device.on('disconnected', this._onDisconnected.bind(this));
 
     this._services = this.createServices();
-    console.log('services created');
   }
 
   getServices() {
@@ -60,7 +59,6 @@ class ProjectorAccessory {
 
     this._bridgingService.getCharacteristic(Characteristic.Reachable)
       .updateValue(this._isReachable);
-	this.log('getBridgingStateService');
     return this._bridgingService;
   }
 
@@ -70,7 +68,6 @@ class ProjectorAccessory {
   }
 
   async _onConnected() {
-    this.log('Connected. Refreshing characteristics.');
     await this._refreshSerialNumber();
     await this._refreshProjectorStatus();
 
@@ -78,7 +75,6 @@ class ProjectorAccessory {
   }
 
   async _refreshProjectorStatus() {
-    this.log('Refresh projector status');
 
     try {
       const powerStatus = await this._refreshPowerStatus();
@@ -100,26 +96,22 @@ class ProjectorAccessory {
   }
 
   async _refreshSerialNumber() {
-    this.log('refreshSerialNumber');
     //const serialNumber = await this._device.execute('SNO?');
     //this.log(`Projector serial number: ${serialNumber.constructor.name}`);
     this._accessoryInformation.setCharacteristic(Characteristic.SerialNumber, '5A2BCCC333D');
   }
 
   async _refreshPowerStatus() {
-    this.log('refreshPowerStatus');
-    const powerState = await this._device.execute('#get ver');
+    const powerState = await this._device.execute('#get input');
     const matches = powerRegex.exec(powerState);
     if (matches === null) {
-      //throw new Error('Failed to process #get ver response');
-      this.log('failed to process #get ver response');
+      throw new Error('Failed to process #get ver response');
     }
 
     return matches[1];
   }
 
   _onDisconnected() {
-    this.log('Disconnected');
     this._setReachable(false);
   }
 
