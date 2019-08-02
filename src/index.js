@@ -4,11 +4,7 @@ const version = require('../package.json').version;
 
 const ProjectorAccessory = require('./ProjectorAccessory');
 
-const ProjectorBulbServiceTypes = require('./types/ProjectorBulbService');
-const ProjectorColorModeServiceTypes = require('./types/ProjectorColorModeService');
-const ProjectorImageServiceTypes = require('./types/ProjectorImageService');
 const ProjectorInputServiceTypes = require('./types/ProjectorInputService');
-const ProjectorPowerStatusServiceTypes = require('./types/ProjectorPowerStatusService');
 
 const HOMEBRIDGE = {
   Accessory: null,
@@ -30,11 +26,7 @@ module.exports = (homebridge) => {
   homebridge.registerPlatform(platformName, platformPrettyName, EpsonProjectorPlatform, false);
 
 
-  ProjectorBulbServiceTypes.registerWith(homebridge.hap);
-  ProjectorColorModeServiceTypes.registerWith(homebridge.hap);
-  ProjectorImageServiceTypes.registerWith(homebridge.hap);
   ProjectorInputServiceTypes.registerWith(homebridge.hap);
-  ProjectorPowerStatusServiceTypes.registerWith(homebridge.hap);
 };
 
 const EpsonProjectorPlatform = class {
