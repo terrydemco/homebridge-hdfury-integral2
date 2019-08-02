@@ -29,7 +29,7 @@ class Transport extends EventEmitter {
 
     this._port = new SerialPort(port, {
       autoOpen: true,
-      baudRate: 9600,
+      baudRate: 19200,
       dataBits: 8,
       stopBits: 1,
       parity: 'none'
