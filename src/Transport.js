@@ -238,7 +238,7 @@ class Transport extends EventEmitter {
   async _sendNullCommand() {
     serial('Sending empty command to poll status');
     try {
-      const response = await this._execute('\r', 1000);
+      const response = await this._execute('#get input \r', 1000);
 
       const colonPos = response.indexOf(':');
 
