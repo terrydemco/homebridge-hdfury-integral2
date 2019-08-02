@@ -57,12 +57,12 @@ class Transport extends EventEmitter {
   }
 
   _onSerialPortClosed(err) {
-    debug(`SignalPort closed: ${err}`);
+    this.log(`SignalPort closed: ${err}`);
     this._changeState(TransportStates.DISCONNECTED);
   }
 
   _onSerialPortFailed(err) {
-    debug(`SerialPort signaled error: ${err}`);
+    this.log(`SerialPort signaled error: ${err}`);
     this.emit('error', err);
   }
 
@@ -110,7 +110,7 @@ class Transport extends EventEmitter {
       }
 
 
-      debug(`Done processing command ${commandId}: response=${JSON.stringify(response)}`);
+      this.log(`Done processing command ${commandId}: response=${JSON.stringify(response)}`);
       if (response === null) {
         throw new Error('Command execution timed out.');
       }
@@ -125,7 +125,7 @@ class Transport extends EventEmitter {
 
   _sendCommand(cmd) {
     return new Promise((resolve, reject) => {
-      debug(`Sending ${cmd}`);
+      this.log(`Sending ${cmd}`);
       this._port.write(cmd, 'ascii', (err) => {
         if (err) {
           reject(err);
@@ -162,7 +162,7 @@ class Transport extends EventEmitter {
   }
 
   _changeState(state) {
-    debug(`Changing state to ${state}`);
+    this.log(`Changing state to ${state}`);
 
     switch (state) {
       case TransportStates.CONNECTING:
@@ -252,7 +252,7 @@ class Transport extends EventEmitter {
   }
 
   _onBackoffStarted(delay) {
-    debug(`Attempting to reconnect in ${delay / 1000} seconds.`);
+    this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
   }
 
   async _connect() {
