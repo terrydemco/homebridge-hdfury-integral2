@@ -12,7 +12,7 @@ module.exports = {
     // TOP Input Characteristic
     ////////////////////////////////////////////////////////////////////////////
     Characteristic.TopInput = function () {
-      Characteristic.call(this, 'Top Input', Characteristic.InputHDMI1.UUID);
+      Characteristic.call(this, 'Top Input', Characteristic.TopInput.UUID);
 
       const props = {
         format: Characteristic.Formats.BOOL,
@@ -22,14 +22,14 @@ module.exports = {
       this.setProps(props);
       this.value = this.getDefaultValue();
     };
-    Characteristic.InputHDMI1.UUID = '97C11EAC-68A6-45FA-9C6B-7B01F84CA6A2';
-    inherits(Characteristic.InputHDMI1, Characteristic);
+    Characteristic.TopInput.UUID = '97C11EAC-68A6-45FA-9C6B-7B01F84CA6A2';
+    inherits(Characteristic.TopInput, Characteristic);
 
     ////////////////////////////////////////////////////////////////////////////
     // BOTTOM Input Characteristic
     ////////////////////////////////////////////////////////////////////////////
     Characteristic.BottomInput = function () {
-      Characteristic.call(this, 'Bottom Input', Characteristic.InputHDMI2.UUID);
+      Characteristic.call(this, 'Bottom Input', Characteristic.BottomInput.UUID);
 
       const props = {
         format: Characteristic.Formats.BOOL,
@@ -39,8 +39,8 @@ module.exports = {
       this.setProps(props);
       this.value = this.getDefaultValue();
     };
-    Characteristic.InputHDMI2.UUID = '97BFCDF3-8E4A-4C00-BFEF-87C2AC531E95';
-    inherits(Characteristic.InputHDMI2, Characteristic);
+    Characteristic.BottomInput.UUID = '97BFCDF3-8E4A-4C00-BFEF-87C2AC531E95';
+    inherits(Characteristic.BottomInput, Characteristic);
 
     ////////////////////////////////////////////////////////////////////////////
     // Projector Input Service
