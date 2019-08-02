@@ -26,7 +26,7 @@ After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
   },
   "platforms": [
     {
-      "platform": "HDFury",
+      "platform": "Integral2",
       "devices": [
         {
           "name": "Integral2",
