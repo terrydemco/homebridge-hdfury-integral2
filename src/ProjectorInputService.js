@@ -59,7 +59,7 @@ class ProjectorInputService {
   }
 
   async _changeInput(c, value, callback) {
-    this.log(`Set Integral2 input source to ${c.source}`);
+    this.log(`Set Integral2 input source to ${value}`);
     try {
       value = value === true ? 'top' : 'bot';
       this.log(`setting value:: ${value}`);
@@ -70,7 +70,7 @@ class ProjectorInputService {
       callback(undefined);
 
       this._updateSource(this._lastKnownSource, false);
-      this._lastKnownSource = c.source;
+      this._lastKnownSource = value;
     }
     catch (e) {
       this.log(`Failed to set characteristic ${e}`);
