@@ -6,7 +6,7 @@ class ProjectorInputService {
   constructor(log, api, device, name) {
 
     this.log = log;
-
+	this.log('creating projector input service');
     this._device = device;
     this._sourceRegex = /SOURCE=([0-9A-Fa-f]+)/;
 
@@ -16,9 +16,9 @@ class ProjectorInputService {
       { source: 0x30, characteristic: Characteristic.TopInput },
       { source: 0xA0, characteristic: Characteristic.BottomInput }
     ];
-
+	this.log('projector input service name');
     this._service = new api.hap.Service.ProjectorInputService(name);
-
+	this.log('before for loop');
     for (let c of this._characteristics) {
       this._service
         .getCharacteristic(c.characteristic)
@@ -31,6 +31,7 @@ class ProjectorInputService {
   }
 
   async update() {
+  	console.log('projector async');
     const status = await this._device.execute('#get input');
     this.log(`received input ${status}`);
     const matches = this._sourceRegex.exec(status);
