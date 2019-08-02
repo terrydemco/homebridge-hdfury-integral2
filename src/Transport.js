@@ -112,9 +112,9 @@ class Transport extends EventEmitter {
         throw new Error('Command execution timed out.');
         //this._synchronize();
       }
-      if (response.startsWith('ERR\r:')) {
-        throw new Error('Unsupported command');
-      }
+      //if (response.startsWith('ERR\r:')) {
+      //  throw new Error('Unsupported command');
+      //}
 
       return response;
     });
@@ -147,7 +147,7 @@ class Transport extends EventEmitter {
   }
 
   _handlePendingData() {
-    this.log(`handlePendingData: ${this._currentRx}`);
+    //this.log(`handlePendingData: ${this._currentRx}`);
     //const readyMarker = this._currentRx.indexOf('\n');
     //const line = this._currentRx.slice(0, readyMarker + 1).toString('ascii');
     //this._currentRx = this._currentRx.slice(readyMarker + 1);

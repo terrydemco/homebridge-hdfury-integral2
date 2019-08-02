@@ -32,12 +32,13 @@ class ProjectorInputService {
     const status = await this._device.execute('#get input');
     this.log(`received input ${status}`);
     //const matches = this._sourceRegex.exec(status);
-    if (status === 'top' || status === 'bot') {
+    if (status === 'input top' || status === 'input bot') {
       
 		const source = status;
       if (source !== this._lastKnownSource) {
         this._updateSource(this._lastKnownSource, false);
-        this._updateSource(source, true);
+        if (source == 'input top') this._updateSource('switch', true);
+        else if (source == 'input bottom') this._updateSource('switch', false);
 
         this._lastKnownSource = source;
       }
