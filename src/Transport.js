@@ -239,7 +239,7 @@ class Transport extends EventEmitter {
       const response = await this._execute('#get input \r', 1000);
 
 
-      if (response === 'input top' || response === 'input bot') {
+      if (response === 'input top' || response === 'input bot' || response === 'top' || response === 'bot') {
       	return true;
       }
       return false;
