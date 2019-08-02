@@ -38,7 +38,7 @@ class ProjectorAccessory {
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),
       //this.getProjectorInputService()
-      this.getSwitchService();
+      this.getSwitchService()
     ];
   }
 
