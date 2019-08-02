@@ -2,12 +2,7 @@
 
 const Transport = require('./Transport');
 
-const ProjectorPowerService = require('./ProjectorPowerService');
-const ProjectorBulbService = require('./ProjectorBulbService');
-const ProjectorColorModeService = require('./ProjectorColorModeService');
-const ProjectorImageService = require('./ProjectorImageService');
 const ProjectorInputService = require('./ProjectorInputService');
-const ProjectorPowerStatusService = require('./ProjectorPowerStatusService');
 
 let Characteristic, Service;
 
@@ -43,12 +38,7 @@ class ProjectorAccessory {
     return [
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),
-      this.getProjectorPowerService(),
-      this.getProjectorBulbService(),
-      this.getProjectorColorModeService(),
-      this.getProjectorImageService(),
       this.getProjectorInputService(),
-      this.getProjectorPowerStatusService()
     ];
   }
 
@@ -56,8 +46,8 @@ class ProjectorAccessory {
     this._accessoryInformation = new Service.AccessoryInformation();
     this._accessoryInformation
       .setCharacteristic(Characteristic.Name, this.name)
-      .setCharacteristic(Characteristic.Manufacturer, 'Epson')
-      .setCharacteristic(Characteristic.Model, 'Projector')
+      .setCharacteristic(Characteristic.Manufacturer, 'HDFury')
+      .setCharacteristic(Characteristic.Model, 'Integral2')
       .setCharacteristic(Characteristic.SerialNumber, '')
       .setCharacteristic(Characteristic.FirmwareRevision, this.config.version)
       .setCharacteristic(Characteristic.HardwareRevision, this.config.version);
@@ -74,34 +64,9 @@ class ProjectorAccessory {
     return this._bridgingService;
   }
 
-  getProjectorPowerService() {
-    this._projectorPowerService = new ProjectorPowerService(this.log, this.api, this._device, this.name);
-    return this._projectorPowerService.getService();
-  }
-
-  getProjectorBulbService() {
-    this._projectorBulbService = new ProjectorBulbService(this.log, this.api, this._device, this.name);
-    return this._projectorBulbService.getService();
-  }
-
-  getProjectorColorModeService() {
-    this._projectorColorModeService = new ProjectorColorModeService(this.log, this.api, this._device, this.name);
-    return this._projectorColorModeService.getService();
-  }
-
-  getProjectorImageService() {
-    this._projectorImageService = new ProjectorImageService(this.log, this.api, this._device, this.name);
-    return this._projectorImageService.getService();
-  }
-
   getProjectorInputService() {
     this._projectorInputService = new ProjectorInputService(this.log, this.api, this._device, this.name);
     return this._projectorInputService.getService();
-  }
-
-  getProjectorPowerStatusService() {
-    this._projetorPowerStatusService = new ProjectorPowerStatusService(this.log, this.api, this._device, this.name);
-    return this._projetorPowerStatusService.getService();
   }
 
   async _onConnected() {
@@ -118,14 +83,9 @@ class ProjectorAccessory {
     try {
       const powerStatus = await this._refreshPowerStatus();
 
-      await this._projectorPowerService.update(powerStatus);
-      await this._projetorPowerStatusService.update(powerStatus);
-      await this._projectorBulbService.update(powerStatus);
-
+      
       if (powerStatus === '01') {
-        await this._projectorColorModeService.update();
-        await this._projectorImageService.update();
-        await this._projectorInputService.update();
+
       }
     }
     catch (e) {
@@ -140,17 +100,16 @@ class ProjectorAccessory {
   }
 
   async _refreshSerialNumber() {
-    const serialNumber = await this._device.execute('SNO?');
-    this.log(`Projector serial number: ${serialNumber.constructor.name}`);
-
-    this._accessoryInformation.setCharacteristic(Characteristic.SerialNumber, serialNumber);
+    //const serialNumber = await this._device.execute('SNO?');
+    //this.log(`Projector serial number: ${serialNumber.constructor.name}`);
+    this._accessoryInformation.setCharacteristic(Characteristic.SerialNumber, '5A2BCCC333D');
   }
 
   async _refreshPowerStatus() {
-    const powerState = await this._device.execute('PWR?');
+    const powerState = await this._device.execute('#get ver');
     const matches = powerRegex.exec(powerState);
     if (matches === null) {
-      throw new Error('Failed to process PWR? response');
+      throw new Error('Failed to process #get ver response');
     }
 
     return matches[1];

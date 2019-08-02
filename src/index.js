@@ -17,8 +17,8 @@ const HOMEBRIDGE = {
   UUIDGen: null
 };
 
-const platformName = 'homebridge-epson-projector-rs232';
-const platformPrettyName = 'EpsonProjector';
+const platformName = 'homebridge-hdfury-integral2-rs232';
+const platformPrettyName = 'Integral2';
 
 module.exports = (homebridge) => {
   HOMEBRIDGE.Accessory = homebridge.platformAccessory;
@@ -40,7 +40,7 @@ module.exports = (homebridge) => {
 const EpsonProjectorPlatform = class {
   constructor(log, config, api) {
     this.log = log;
-    this.log(`Epson Projector Platform Plugin Loaded - Version ${version}`);
+    this.log(`HDFury Integral2 Platform Plugin Loaded - Version ${version}`);
     this.config = config;
     this.api = api;
 

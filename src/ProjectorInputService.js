@@ -13,11 +13,8 @@ class ProjectorInputService {
     Characteristic = api.hap.Characteristic;
 
     this._characteristics = [
-      { source: 0x30, characteristic: Characteristic.InputHDMI1 },
-      { source: 0xA0, characteristic: Characteristic.InputHDMI2 },
-      { source: 0x10, characteristic: Characteristic.InputComponent },
-      { source: 0x20, characteristic: Characteristic.InputPC },
-      { source: 0x40, characteristic: Characteristic.InputVideo }
+      { source: 0x30, characteristic: Characteristic.TopInput },
+      { source: 0xA0, characteristic: Characteristic.BottomInput }
     ];
 
     this._service = new api.hap.Service.ProjectorInputService(name);
@@ -34,7 +31,8 @@ class ProjectorInputService {
   }
 
   async update() {
-    const status = await this._device.execute('SOURCE?');
+    const status = await this._device.execute('#get input');
+    this.log(`received input ${status}`);
     const matches = this._sourceRegex.exec(status);
     if (matches !== null) {
       let source = Number.parseInt(matches[1], 16) & 0xF0;
@@ -47,7 +45,7 @@ class ProjectorInputService {
       }
     }
     else {
-      this.log(`Failed to refresh characteristic state: SOURCE? => ${status}`);
+      this.log(`Failed to refresh characteristic state: #get input => ${status}`);
     }
   }
 
@@ -61,10 +59,10 @@ class ProjectorInputService {
   }
 
   async _changeInput(c, value, callback) {
-    this.log(`Set projector SOURCE to ${c.source}`);
+    this.log(`Set Integral2 input source to ${c.source}`);
     try {
-      value = ('00' + c.source.toString(16)).substr(-2);
-      const cmd = `SOURCE ${value}`;
+      //value = (c.source.toString(16)).substr(-2);
+      const cmd = `#set input ${c.source}`;
 
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
