@@ -20,9 +20,9 @@ function noop() {
 
 class Transport extends EventEmitter {
 
-  constructor(port) {
+  constructor(port, log) {
     super();
-
+	this.log = log;
     this._currentRx = Buffer.alloc(0);
     this._pendingReads = [];
     this._command = 0;
@@ -190,7 +190,7 @@ class Transport extends EventEmitter {
   }
 
   _onDisconnected() {
-    this.log('Disconnected from projector...');
+    debug('Disconnected from projector...');
     this._backoff.backoff();
   }
 

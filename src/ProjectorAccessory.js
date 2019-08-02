@@ -22,7 +22,7 @@ class ProjectorAccessory {
     this.config.pollingInterval = this.config.pollingInterval || 60000;
 
     this._isReachable = false;
-    this._device = new Transport(this.config.port);
+    this._device = new Transport(this.config.port, log);
     this._device.on('connected', this._onConnected.bind(this));
     this._device.on('disconnected', this._onDisconnected.bind(this));
 
@@ -91,7 +91,6 @@ class ProjectorAccessory {
     catch (e) {
       // Do not leak the exception
       this.log(`Failed to refresh status: ${e}`);
-      console.log(`failed to refresh status ${e}`);
     }
 
     // Schedule another update
