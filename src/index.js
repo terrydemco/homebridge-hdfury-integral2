@@ -42,9 +42,9 @@ mySwitch.prototype = {
 
     let switchService = new Service.Switch("My switch");
     switchService
-      .getCharacteristic(Characteristic.On)
-      .on('get', this.getSwitchOnCharacteristic.bind(this))
-      .on('set', this.setSwitchOnCharacteristic.bind(this));
+      .getCharacteristic(Characteristic.On);
+      //.on('get', this.getSwitchOnCharacteristic.bind(this))
+      //.on('set', this.setSwitchOnCharacteristic.bind(this));
 
     this.informationService = informationService;
     this.switchService = switchService;
