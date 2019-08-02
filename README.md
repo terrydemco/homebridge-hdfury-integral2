@@ -1,4 +1,4 @@
-# homebridge-epson-projector
+# homebridge-hdfury-integral2
 
 A homebridge plugin reworked to control HDFury Integral2 via RS-232.
 In development, not currently working
