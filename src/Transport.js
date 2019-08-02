@@ -82,8 +82,8 @@ class Transport extends EventEmitter {
       throw new Error('Not connected');
     }
 
-    // Default timeout of 10s
-    timeout = timeout || 10000;
+    // Default timeout of 10s = 10000
+    timeout = timeout || 1000;
 
     // Append a \r to the string
     cmd = cmd + '\r';
