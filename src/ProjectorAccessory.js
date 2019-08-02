@@ -37,7 +37,8 @@ class ProjectorAccessory {
     return [
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),
-      this.getProjectorInputService()
+      //this.getProjectorInputService()
+      this.getSwitchService();
     ];
   }
 
@@ -65,6 +66,39 @@ class ProjectorAccessory {
   getProjectorInputService() {
     this._projectorInputService = new ProjectorInputService(this.log, this.api, this._device, this.name);
     return this._projectorInputService.getService();
+  }
+  
+  getSwitchService() {
+    let switchService = new Service.Switch("My switch");
+    switchService
+      .getCharacteristic(Characteristic.On)
+      .on('get', this.getSwitchOnCharacteristic.bind(this))
+      .on('set', this.setSwitchOnCharacteristic.bind(this));
+  }
+  
+    getSwitchOnCharacteristic: function () {
+
+  },
+
+  setSwitchOnCharacteristic: function (value) {
+        this.log(`Set Integral2 input source to ${value}`);
+    try {
+      value = value === true ? 'top' : 'bot';
+      this.log(`setting value:: ${value}`);
+      const cmd = `#set input ${value}`;
+
+      this.log(`Sending ${cmd}`);
+      await this._device.execute(cmd);
+      callback(undefined);
+
+      this._updateSource(this._lastKnownSource, false);
+      this._lastKnownSource = value;
+    }
+    catch (e) {
+      this.log(`Failed to set characteristic ${e}`);
+      callback(e);
+    }
+  }
   }
 
   async _onConnected() {

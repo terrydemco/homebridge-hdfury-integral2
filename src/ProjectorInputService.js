@@ -12,8 +12,7 @@ class ProjectorInputService {
     Characteristic = api.hap.Characteristic;
 
     this._characteristics = [
-      { source: 'TopInput', characteristic: Characteristic.Switch },
-      { source: 'On', characteristic: Characteristic.On },
+      { source: 'TopInput', characteristic: Characteristic.Switch }
     ];
     this._service = new api.hap.Service.ProjectorInputService(name);
     for (let c of this._characteristics) {
