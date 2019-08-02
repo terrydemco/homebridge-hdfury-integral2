@@ -103,10 +103,7 @@ class Transport extends EventEmitter {
         await this._sendCommand(cmd);
 
         response = await Promise.race([readPromise, timeoutPromise]);
-        if (response === null) {
-          this.log('Command execution timed out.');
-          //this._synchronize();
-        }
+       
       }
 
 
@@ -114,6 +111,7 @@ class Transport extends EventEmitter {
       if (response === null) {
         //throw new Error('Command execution timed out.');
         this.log('ERROR: Command execution timed out.');
+        //this._synchronize();
       }
       if (response.startsWith('ERR\r:')) {
         throw new Error('Unsupported command');
@@ -240,7 +238,7 @@ class Transport extends EventEmitter {
   async _sendNullCommand() {
     serial('Sending empty command to poll status');
     try {
-      const response = await this._execute('#get input \r', 1000);
+      const response = await this._execute('\r', 1000);
 
       const colonPos = response.indexOf(':');
 
