@@ -63,7 +63,7 @@ class ProjectorInputService {
     try {
       value = value === true ? 'top' : 'bot';
       this.log(`setting value:: ${value}`);
-      const cmd = `#set input ${c.source}`;
+      const cmd = `#set input ${value}`;
 
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
