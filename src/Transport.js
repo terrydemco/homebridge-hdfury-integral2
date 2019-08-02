@@ -83,7 +83,7 @@ class Transport extends EventEmitter {
     }
 
     // Default timeout of 10s = 10000
-    timeout = timeout || 1000;
+    timeout = timeout || 10000;
 
     // Append a \r to the string
     cmd = cmd + '\r';
