@@ -35,7 +35,6 @@ class ProjectorAccessory {
   }
 
   createServices() {
-  this.log('creating services');
     return [
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),
@@ -61,7 +60,7 @@ class ProjectorAccessory {
 
     this._bridgingService.getCharacteristic(Characteristic.Reachable)
       .updateValue(this._isReachable);
-
+	this.log('getBridgingStateService');
     return this._bridgingService;
   }
 
@@ -72,7 +71,6 @@ class ProjectorAccessory {
 
   async _onConnected() {
     this.log('Connected. Refreshing characteristics.');
-    console.log('Connected. Refreshing characteristics.');
     await this._refreshSerialNumber();
     await this._refreshProjectorStatus();
 
@@ -103,12 +101,14 @@ class ProjectorAccessory {
   }
 
   async _refreshSerialNumber() {
+    this.log('refreshSerialNumber');
     //const serialNumber = await this._device.execute('SNO?');
     //this.log(`Projector serial number: ${serialNumber.constructor.name}`);
     this._accessoryInformation.setCharacteristic(Characteristic.SerialNumber, '5A2BCCC333D');
   }
 
   async _refreshPowerStatus() {
+    this.log('refreshPowerStatus');
     const powerState = await this._device.execute('#get ver');
     const matches = powerRegex.exec(powerState);
     if (matches === null) {
