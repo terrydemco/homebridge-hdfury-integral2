@@ -99,7 +99,6 @@ class ProjectorAccessory {
       callback(e);
     }
   }
-  }
 
   async _onConnected() {
     await this._refreshSerialNumber();
