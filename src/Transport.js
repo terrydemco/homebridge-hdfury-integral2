@@ -207,6 +207,7 @@ class Transport extends EventEmitter {
     }
 
     serial(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
+    this.log(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
     return synchronized;
   }
 
@@ -258,6 +259,7 @@ class Transport extends EventEmitter {
     if (await this._synchronize() === true) {
       this._changeState(TransportStates.CONNECTED);
     }
+    this._changeState(TransportStates.CONNECTED);
   }
 
   _createTimeout(timeout) {

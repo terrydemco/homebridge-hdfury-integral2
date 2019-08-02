@@ -21,7 +21,6 @@ class ProjectorInputService {
         .getCharacteristic(c.characteristic)
         .on('set', this._changeInput.bind(this, c));
     }
-    this.log('finished constructing projectorinputservice');
   }
 
   getService() {
@@ -30,7 +29,7 @@ class ProjectorInputService {
   }
 
   async update() {
-  	this.log('projector async');
+  	this.log('projector async update');
     const status = await this._device.execute('#get input');
     this.log(`received input ${status}`);
     const matches = this._sourceRegex.exec(status);
