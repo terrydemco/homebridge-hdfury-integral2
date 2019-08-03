@@ -14,16 +14,12 @@ const HOMEBRIDGE = {
 
 
 module.exports = (homebridge) => {
-  //HOMEBRIDGE.Accessory = homebridge.platformAccessory;
   HOMEBRIDGE.Service = homebridge.hap.Service;
   HOMEBRIDGE.Characteristic = homebridge.hap.Characteristic;
-  //HOMEBRIDGE.UUIDGen = homebridge.hap.uuid;
   HOMEBRIDGE.homebridge = homebridge;
 
-  //homebridge.registerPlatform(platformName, platformPrettyName, EpsonProjectorPlatform, false);
   homebridge.registerAccessory("homebridge-hdfury-integral2-rs232", "Integral2", mySwitch)
 
-  //ProjectorInputServiceTypes.registerWith(homebridge.hap);
 };
 
 
