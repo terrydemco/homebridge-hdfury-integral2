@@ -107,7 +107,7 @@ class Transport extends EventEmitter {
       }
 
 
-      this.log(`Done processing command ${commandId}: response=${response}`);
+      //this.log(`Done processing command ${commandId}: response=${response}`);
       if (response === null) {
         throw new Error('Command execution timed out.');
         //this._synchronize();
@@ -157,7 +157,7 @@ class Transport extends EventEmitter {
   }
 
   _changeState(state) {
-    this.log(`Changing state to ${state}`);
+    //this.log(`Changing state to ${state}`);
 
     switch (state) {
       case TransportStates.CONNECTING:
@@ -174,18 +174,18 @@ class Transport extends EventEmitter {
   }
 
   _onConnecting() {
-    this.log('Connecting to projector...');
+    //this.log('Connecting to HDFury...');
   }
 
   _onConnected() {
-    this.log('Connected to projector...');
+    //this.log('Connected to HDFury...');
     this._backoff.reset();
 
     // TODO: Initiate connection check timer?
   }
 
   _onDisconnected() {
-    debug('Disconnected from projector...');
+    debug('Disconnected from HDFury...');
     this._backoff.backoff();
   }
 
@@ -203,7 +203,7 @@ class Transport extends EventEmitter {
     }
 
     serial(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
-    this.log(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
+    //this.log(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
     return synchronized;
   }
 
@@ -250,7 +250,7 @@ class Transport extends EventEmitter {
   }
 
   _onBackoffStarted(delay) {
-    this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
+    //this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
   }
 
   async _connect() {

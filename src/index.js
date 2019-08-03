@@ -57,7 +57,7 @@ mySwitch.prototype = {
 	},
 	updatePowerState: async function() {
   	const powerState = await this._device.execute('#get input');
-	this.log(`Powerstate = ${powerState}`);
+	//this.log(`Powerstate = ${powerState}`);
 	
 	let state;
 	if (powerState === 'input top' || powerState === 'top') {
@@ -72,20 +72,20 @@ mySwitch.prototype = {
   	},
 	
 	getSwitchOnCharacteristic: async function (next) {
-	this.log('getSwitchCharacteristic');
+	//this.log('getSwitchCharacteristic');
 	
 	
 	return next();
 	},
 	setSwitchOnCharacteristic: async function (on, next) {
 	
-	    this.log(`Set Integral2 top input source to ${on}`);
+	    //this.log(`Set Integral2 top input source to ${on}`);
     try {
       const value = on === true ? 'top' : 'bot';
-      this.log(`setting value:: ${value}`);
+      //this.log(`setting value:: ${value}`);
       const cmd = `#set input ${value}`;
 
-      this.log(`Sending ${cmd}`);
+      //this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
       //await this.timeout(2000);
       //this.updatePowerState();
