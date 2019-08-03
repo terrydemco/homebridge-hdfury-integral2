@@ -1,6 +1,7 @@
 'use strict';
 
 const version = require('../package.json').version;
+const Transport = require('./Transport');
 
 
 
@@ -53,9 +54,11 @@ mySwitch.prototype = {
 	
 	getSwitchOnCharacteristic: function (next) {
 	this.log('getSwitchCharacteristic');
+	return next();
 	},
 	setSwitchOnCharacteristic: function (on, next) {
 	this.log(`setSwitchCharacteristic ${on} - ${next}`);
+	return next();
 	}
 
 
