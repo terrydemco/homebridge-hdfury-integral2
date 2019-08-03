@@ -42,15 +42,15 @@ mySwitch.prototype = {
       .setCharacteristic(Characteristic.Model, "Integral2")
       .setCharacteristic(Characteristic.SerialNumber, "123-456-789");
 
-    this._switchService = new Service.Switch("HDMI Switch");
-    this._switchService
+    let switchService = new Service.Switch("HDMI Switch");
+    switchService
       .getCharacteristic(Characteristic.On)
       .on('get', this.getSwitchOnCharacteristic.bind(this))
       .on('set', this.setSwitchOnCharacteristic.bind(this));
 
     this.informationService = informationService;
     this.switchService = switchService;
-    return [informationService, this._switchService];
+    return [informationService, switchService];
 	},
 	  updatePowerState: async function() {
   	const powerState = await this._device.execute('#get input');
@@ -61,7 +61,7 @@ mySwitch.prototype = {
 	} else {
 		const state = false;
 	}
-	this._switchService
+	this.switchService
         .getCharacteristic(Characteristic.On)
         .updateValue(state);
         return state;
