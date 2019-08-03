@@ -26,6 +26,8 @@ module.exports = (homebridge) => {
   //ProjectorInputServiceTypes.registerWith(homebridge.hap);
 };
 
+this._device = new Transport(this.config.port, log);
+
 function mySwitch(log, config) {
   this.log = log;
   this.log(`log-> ${log}  - $ ${config}`);
