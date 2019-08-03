@@ -19,7 +19,6 @@ module.exports = (homebridge) => {
   HOMEBRIDGE.homebridge = homebridge;
 
   homebridge.registerAccessory("homebridge-hdfury-integral2-rs232", "Integral2", mySwitch)
-
 };
 
 
@@ -67,9 +66,7 @@ mySwitch.prototype = {
         return state;
   	},
 	
-	getSwitchOnCharacteristic: async function (next) {
-	//this.log('getSwitchCharacteristic');
-	
+	getSwitchOnCharacteristic: async function (next) {	
 	
 	return next();
 	},
