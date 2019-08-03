@@ -36,15 +36,15 @@ mySwitch.prototype = {
 	getServices: function() {
 		 let informationService = new Service.AccessoryInformation();
     informationService
-      .setCharacteristic(Characteristic.Manufacturer, "My switch manufacturer")
-      .setCharacteristic(Characteristic.Model, "My switch model")
+      .setCharacteristic(Characteristic.Manufacturer, "HDFury")
+      .setCharacteristic(Characteristic.Model, "Integral2")
       .setCharacteristic(Characteristic.SerialNumber, "123-456-789");
 
-    let switchService = new Service.Switch("My switch");
+    let switchService = new Service.Switch("HDMI Switch");
     switchService
-      .getCharacteristic(Characteristic.On);
-      //.on('get', this.getSwitchOnCharacteristic.bind(this))
-      //.on('set', this.setSwitchOnCharacteristic.bind(this));
+      .getCharacteristic(Characteristic.On)
+      .on('get', this.getSwitchOnCharacteristic.bind(this))
+      .on('set', this.setSwitchOnCharacteristic.bind(this));
 
     this.informationService = informationService;
     this.switchService = switchService;
@@ -52,8 +52,10 @@ mySwitch.prototype = {
 	},
 	
 	getSwitchOnCharacteristic: function (next) {
+	this.log('getSwitchCharacteristic');
 	},
 	setSwitchOnCharacteristic: function (on, next) {
+	this.log(`setSwitchCharacteristic ${on} - ${next}`);
 	}
 
 
