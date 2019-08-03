@@ -52,7 +52,7 @@ mySwitch.prototype = {
     this.switchService = switchService;
     return [informationService, switchService];
 	},
-	  updatePowerState: async function() {
+	updatePowerState: async function() {
   	const powerState = await this._device.execute('#get input');
 	this.log(`Powerstate = ${powerState}`);
 	
@@ -84,7 +84,8 @@ mySwitch.prototype = {
 
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
-      await setTimeout(() => this.updatePowerState, 1000);
+      await timeout(2000);
+      this.updatePowerState();
     
 
     }
