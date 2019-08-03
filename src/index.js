@@ -56,7 +56,7 @@ mySwitch.prototype = {
 	this.log('getSwitchCharacteristic');
 	const powerState = await this._device.execute('#get input');
 	this.log(`Powerstate = ${powerState}`);
-	return next();
+	next();
 	},
 	setSwitchOnCharacteristic: async function (on, next) {
 	
@@ -76,7 +76,7 @@ mySwitch.prototype = {
     }
   }
 	
-	return next();
+	next();
 	}
 
 
