@@ -56,10 +56,11 @@ mySwitch.prototype = {
   	const powerState = await this._device.execute('#get input');
 	this.log(`Powerstate = ${powerState}`);
 	
+	let state;
 	if (powerState === 'input top' || powerState === 'top') {
-		const state = true;
+		state = true;
 	} else {
-		const state = false;
+		state = false;
 	}
 	this.switchService
         .getCharacteristic(Characteristic.On)
