@@ -52,12 +52,28 @@ mySwitch.prototype = {
     return [informationService, switchService];
 	},
 	
-	getSwitchOnCharacteristic: function (next) {
+	getSwitchOnCharacteristic: function async (next) {
 	this.log('getSwitchCharacteristic');
 	return next();
 	},
-	setSwitchOnCharacteristic: function (on, next) {
-	this.log(`setSwitchCharacteristic ${on} - ${next}`);
+	setSwitchOnCharacteristic: function async (on, next) {
+	
+	    this.log(`Set Integral2 input source to ${value}`);
+    try {
+      value = value === true ? 'top' : 'bot';
+      this.log(`setting value:: ${value}`);
+      const cmd = `#set input ${value}`;
+
+      this.log(`Sending ${cmd}`);
+      await this._device.execute(cmd);
+
+    }
+    catch (e) {
+      this.log(`Failed to set characteristic ${e}`);
+      callback(e);
+    }
+  }
+	
 	return next();
 	}
 
