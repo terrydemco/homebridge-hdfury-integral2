@@ -63,7 +63,7 @@ mySwitch.prototype = {
 	
 	    this.log(`Set Integral2 input source to ${value}`);
     try {
-      value = value === true ? 'top' : 'bot';
+      const value = on === true ? 'top' : 'bot';
       this.log(`setting value:: ${value}`);
       const cmd = `#set input ${value}`;
 
