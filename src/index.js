@@ -77,7 +77,5 @@ mySwitch.prototype = {
     return next();
   }
 	
-	}
-
-
 }
+
