@@ -88,7 +88,7 @@ mySwitch.prototype = {
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
       await this.timeout(2000);
-      //this.updatePowerState();
+      this.updatePowerState();
     
 
     }
