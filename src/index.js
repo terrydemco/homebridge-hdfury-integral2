@@ -42,7 +42,7 @@ mySwitch.prototype = {
       .setCharacteristic(Characteristic.Model, "Integral2")
       .setCharacteristic(Characteristic.SerialNumber, "123-456-789");
 
-    let this._switchService = new Service.Switch("HDMI Switch");
+    this._switchService = new Service.Switch("HDMI Switch");
     this._switchService
       .getCharacteristic(Characteristic.On)
       .on('get', this.getSwitchOnCharacteristic.bind(this))
