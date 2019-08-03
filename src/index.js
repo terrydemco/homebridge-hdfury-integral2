@@ -72,7 +72,7 @@ mySwitch.prototype = {
     }
     catch (e) {
       this.log(`Failed to set characteristic ${e}`);
-      callback(e);
+      next(e);
     }
     return next();
   }
