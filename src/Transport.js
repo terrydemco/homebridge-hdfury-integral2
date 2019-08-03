@@ -123,7 +123,6 @@ class Transport extends EventEmitter {
 
   _sendCommand(cmd) {
     return new Promise((resolve, reject) => {
-      this.log(`Sending ${cmd}`);
       this._port.write(cmd, 'ascii', (err) => {
         if (err) {
           reject(err);
