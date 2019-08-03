@@ -26,11 +26,10 @@ module.exports = (homebridge) => {
   //ProjectorInputServiceTypes.registerWith(homebridge.hap);
 };
 
-this._device = new Transport("/dev/ttyUSB0", log);
 
 function mySwitch(log, config) {
   this.log = log;
-  this.log(`log-> ${log}  - $ ${config}`);
+  this._device = new Transport("/dev/ttyUSB0", log);
 
 }
 
