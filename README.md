@@ -15,7 +15,7 @@ In development, not currently working
 
 After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
 
- ```sudo npm install -g homebridge-epson-projector-rs232 --unsafe-perm```
+ ```sudo npm install -g terrydemco/homebridge-epson-projector-rs232 --unsafe-perm```
 
 ### Configuration
 
