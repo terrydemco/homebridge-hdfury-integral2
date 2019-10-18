@@ -2,6 +2,7 @@
 
 const version = require('../package.json').version;
 const Transport = require('./Transport');
+const debug = require('debug')('ESCVP21');
 
 
 
