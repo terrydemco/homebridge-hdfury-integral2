@@ -144,9 +144,9 @@ class Transport extends EventEmitter {
     //this._currentRx = this._currentRx.slice(readyMarker + 2);
 
       //this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
-      const pendingRead = this._pendingReads.shift() || noop;
-      pendingRead(this._currentRx);
+      const pendingRead = this._pendingReads.shift();
       this.log(`CurrentRX: ${this._currentRx}`);
+      pendingRead(this._currentRx);
   }
 
   _changeState(state) {
