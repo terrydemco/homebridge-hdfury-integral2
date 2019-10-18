@@ -98,14 +98,14 @@ class Transport extends EventEmitter {
 
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
-        this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
+        //this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
         //const timeoutPromise = this._createTimeout(timeout);
         //const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
 
 
         //response = await readPromise;
-        this.log(`the current Rx is: ${this._currentRx}`);
+        //this.log(`the current Rx is: ${this._currentRx}`);
         return this._currentRx;
       }
     });
@@ -145,7 +145,7 @@ class Transport extends EventEmitter {
 
       //this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
       const pendingRead = this._pendingReads.shift();
-      this.log(`CurrentRX: ${this._currentRx}`);
+      //this.log(`CurrentRX: ${this._currentRx}`);
       pendingRead(this._currentRx);
   }
 
