@@ -71,10 +71,11 @@ mySwitch.prototype = {
 	this.log(`Powerstate = ${powerState}`);
 	
 	let state;
-	if (powerState == 'input top' || powerState == 'top') {
+	if (powerState === 'input top' || powerState === 'top') {
 		state = true;
 	} else {
 		state = false;
+		console.log(`state: ${state}`);
 	}
 	this.log(`getSwitchCharacteristic returning: ${state}`);
 	return callback(null, state);
