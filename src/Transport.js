@@ -93,6 +93,7 @@ class Transport extends EventEmitter {
 
   _execute(cmd, timeout) {
     return this._taskQueue.push(async () => {
+      await this._drainAndFlush();
       const commandId = this._command++;
 
       let response = null;
