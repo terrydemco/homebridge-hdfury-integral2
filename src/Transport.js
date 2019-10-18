@@ -68,13 +68,13 @@ class Transport extends EventEmitter {
 
   _onSerialPortData(data) {
     data = Buffer.from(data);
-    serial(`SerialPort received ${JSON.stringify(data)}`);
+    this.log(`SerialPort received ${JSON.stringify(data)}`);
 
     this._currentRx = Buffer.concat([this._currentRx, data]);
-    serial(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
+    this.log(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
 
     // Verify if this a complete line
-    this._handlePendingData();
+    //this._handlePendingData();
   }
 
   execute(cmd, timeout) {
