@@ -148,14 +148,15 @@ class Transport extends EventEmitter {
 
   _handlePendingData() {
   setTimeout(() => {
-    this.log(`handlePendingData: ${this._currentRx}`);
-    const readyMarker = this._currentRx.indexOf('\n');
-    const line = this._currentRx.slice(0, readyMarker + 2).toString('ascii');
-    this._currentRx = this._currentRx.slice(readyMarker + 2);
+    //this.log(`handlePendingData: ${this._currentRx}`);
+    //const readyMarker = this._currentRx.indexOf('\n');
+    //const line = this._currentRx.slice(0, readyMarker + 2).toString('ascii');
+    //this._currentRx = this._currentRx.slice(readyMarker + 2);
 
-      this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
+      //this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
       const pendingRead = this._pendingReads.shift() || noop;
       pendingRead(this._currentRx);
+      this.log(`CurrentRX: ${this._currentRx}`);
 }, 1000);
   }
 
