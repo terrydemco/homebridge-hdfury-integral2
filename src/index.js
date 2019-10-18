@@ -23,7 +23,7 @@ module.exports = (homebridge) => {
 
 
 function mySwitch(log, config) {
-  debug = log;
+  this.log = log;
   this._device = new Transport("/dev/ttyUSB0", log);
 
 }
