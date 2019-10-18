@@ -178,7 +178,7 @@ class Transport extends EventEmitter {
   }
 
   _onDisconnected() {
-    debug('Disconnected from HDFury...');
+    this.log('Disconnected from HDFury...');
     this._backoff.backoff();
   }
 
