@@ -139,7 +139,7 @@ class Transport extends EventEmitter {
       this._pendingReads.push(resolve);
       if (this._pendingReads.length === 1) {
         // Check if we have an incoming pending data block
-        setTimeout(() => {
+        await setTimeout(() => {
                 this._handlePendingData();
         }, 100);
       }
