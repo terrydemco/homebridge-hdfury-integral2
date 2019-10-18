@@ -91,7 +91,7 @@ class Transport extends EventEmitter {
     return this._execute(cmd, timeout);
   }
 
-  async _execute(cmd, timeout) {
+  _execute(cmd, timeout) {
     return this._taskQueue.push(async () => {
       await this._drainAndFlush();
       const commandId = this._command++;
@@ -228,7 +228,7 @@ class Transport extends EventEmitter {
   async _sendNullCommand() {
     serial('Sending empty command to poll status');
     try {
-      const response = await this._execute('#get input', 1000);
+      const response = await this._execute('#get input \r', 1000);
 
 	  this.log(`response = ${response}\r`);
       if (response === 'input top' || response === 'input bot' || response === 'top' || response === 'bot') {
