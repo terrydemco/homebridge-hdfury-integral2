@@ -76,6 +76,7 @@ mySwitch.prototype = {
 	} else {
 		state = false;
 	}
+	this.log(`getSwitchCharacteristic returning: ${state}`);
 	return callback(null, state);
 	},
 	setSwitchOnCharacteristic: async function (on, next) {
