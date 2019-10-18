@@ -139,7 +139,9 @@ class Transport extends EventEmitter {
       this._pendingReads.push(resolve);
       if (this._pendingReads.length === 1) {
         // Check if we have an incoming pending data block
-        this._handlePendingData();
+        setTimeout(() => {
+                this._handlePendingData();
+        }, 100);
       }
     });
 
@@ -147,7 +149,6 @@ class Transport extends EventEmitter {
   }
 
   _handlePendingData() {
-  setTimeout(() => {
     //this.log(`handlePendingData: ${this._currentRx}`);
     //const readyMarker = this._currentRx.indexOf('\n');
     //const line = this._currentRx.slice(0, readyMarker + 2).toString('ascii');
@@ -157,7 +158,6 @@ class Transport extends EventEmitter {
       const pendingRead = this._pendingReads.shift() || noop;
       pendingRead(this._currentRx);
       this.log(`CurrentRX: ${this._currentRx}`);
-}, 1000);
   }
 
   _changeState(state) {
