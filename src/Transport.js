@@ -152,7 +152,7 @@ class Transport extends EventEmitter {
     const line = this._currentRx.slice(0, readyMarker + 1).toString('ascii');
     this._currentRx = this._currentRx.slice(readyMarker + 1);
 
-      serial(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
+      this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
       const pendingRead = this._pendingReads.shift() || noop;
       pendingRead(this._currentRx);
   }
