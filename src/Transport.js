@@ -105,11 +105,7 @@ class Transport extends EventEmitter {
 
         Promise.race([readPromise, timeoutPromise]).then((response)=> {
         	this.log(`quick response: ${response}`);
-        });
-      }
-
-
-      this.log(`Done processing command ${commandId}: response=${response}`);
+    		this.log(`Done processing command ${commandId}: response=${response}`);
       if (response === null) {
         throw new Error('Command execution timed out.');
         //this._synchronize();
@@ -119,6 +115,8 @@ class Transport extends EventEmitter {
       //}
 
       return response;
+        });
+      }
     });
   }
 
