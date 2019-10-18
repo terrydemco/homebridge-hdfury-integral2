@@ -97,7 +97,7 @@ class Transport extends EventEmitter {
 
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
-        //this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
+        this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
         const timeoutPromise = this._createTimeout(timeout);
         const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
@@ -107,7 +107,7 @@ class Transport extends EventEmitter {
       }
 
 
-      //this.log(`Done processing command ${commandId}: response=${response}`);
+      this.log(`Done processing command ${commandId}: response=${response}`);
       if (response === null) {
         throw new Error('Command execution timed out.');
         //this._synchronize();
@@ -174,11 +174,11 @@ class Transport extends EventEmitter {
   }
 
   _onConnecting() {
-    //this.log('Connecting to HDFury...');
+    this.log('Connecting to HDFury...');
   }
 
   _onConnected() {
-    //this.log('Connected to HDFury...');
+    this.log('Connected to HDFury...');
     this._backoff.reset();
 
     // TODO: Initiate connection check timer?
@@ -203,7 +203,7 @@ class Transport extends EventEmitter {
     }
 
     serial(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
-    //this.log(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
+    this.log(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
     return synchronized;
   }
 
@@ -250,7 +250,7 @@ class Transport extends EventEmitter {
   }
 
   _onBackoffStarted(delay) {
-    //this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
+    this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
   }
 
   async _connect() {
