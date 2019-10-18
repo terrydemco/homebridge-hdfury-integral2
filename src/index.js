@@ -76,7 +76,7 @@ mySwitch.prototype = {
     try {
       const value = on === true ? 'top' : 'bot';
       this.log(`setting value:: ${value}`);
-      const cmd = `#set input ${value}\r`;
+      const cmd = `#set input ${value}`;
 
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
