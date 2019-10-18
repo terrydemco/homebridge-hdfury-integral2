@@ -135,13 +135,12 @@ class Transport extends EventEmitter {
   }
 
   async _scheduleRead() {
+   await setTimeout(100);
     const promise = new Promise(resolve => {
       this._pendingReads.push(resolve);
       if (this._pendingReads.length === 1) {
         // Check if we have an incoming pending data block
-        await setTimeout(() => {
-                this._handlePendingData();
-        }, 100);
+            this._handlePendingData();
       }
     });
 
