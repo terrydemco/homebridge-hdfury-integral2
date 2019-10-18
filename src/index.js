@@ -75,8 +75,8 @@ mySwitch.prototype = {
 	    this.log(`Set Integral2 top input source to ${on}`);
     try {
       const value = on === true ? 'top' : 'bot';
-      this.log(`setting value:: ${value}`);
-      const cmd = `#set input ${value}`;
+      this.log(`setting value::${value}`);
+      const cmd = `#set input ${value} \r`;
 
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);

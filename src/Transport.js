@@ -235,7 +235,7 @@ class Transport extends EventEmitter {
   async _sendNullCommand() {
     serial('Sending empty command to poll status');
     try {
-      const response = await this._execute('#get input', 1000);
+      const response = await this._execute('#get input \r', 1000);
 
 	  this.log('response = ${response}');
       if (response === 'input top' || response === 'input bot' || response === 'top' || response === 'bot') {
