@@ -71,7 +71,7 @@ mySwitch.prototype = {
 	this.log(`Powerstate = ${powerState}`);
 	
 	let state;
-	if (powerState === 'input top' || powerState === 'top') {
+	if (powerState.includes('top')) {
 		state = true;
 	} else {
 		state = false;
