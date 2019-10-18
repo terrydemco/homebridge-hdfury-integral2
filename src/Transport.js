@@ -22,7 +22,7 @@ class Transport extends EventEmitter {
 
   constructor(port, log) {
     super();
-	//this.log = log;
+	this.log = log;
     this._currentRx = Buffer.alloc(0);
     this._pendingReads = [];
     this._command = 0;
@@ -57,21 +57,21 @@ class Transport extends EventEmitter {
   }
 
   _onSerialPortClosed(err) {
-    //this.log(`SignalPort closed: ${err}`);
+    this.log(`SignalPort closed: ${err}`);
     this._changeState(TransportStates.DISCONNECTED);
   }
 
   _onSerialPortFailed(err) {
-    //this.log(`SerialPort signaled error: ${err}`);
+    this.log(`SerialPort signaled error: ${err}`);
     this.emit('error', err);
   }
 
   _onSerialPortData(data) {
     data = Buffer.from(data);
-    //this.log(`SerialPort received ${JSON.stringify(data)}`);
+    this.log(`SerialPort received ${JSON.stringify(data)}`);
 
     this._currentRx = Buffer.concat([this._currentRx, data]);
-    //this.log(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
+    this.log(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
 
     // Verify if this a complete line
     //this._handlePendingData();
@@ -98,14 +98,14 @@ class Transport extends EventEmitter {
 
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
-        //this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
+        this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
         //const timeoutPromise = this._createTimeout(timeout);
         //const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
 
 
         //response = await readPromise;
-        //this.log(`the current Rx is: ${this._currentRx}`);
+        this.log(`the current Rx is: ${this._currentRx}`);
         return this._currentRx;
       }
     });
@@ -138,19 +138,19 @@ class Transport extends EventEmitter {
   }
 
   _handlePendingData() {
-    ////this.log(`handlePendingData: ${this._currentRx}`);
+    //this.log(`handlePendingData: ${this._currentRx}`);
     //const readyMarker = this._currentRx.indexOf('\n');
     //const line = this._currentRx.slice(0, readyMarker + 2).toString('ascii');
     //this._currentRx = this._currentRx.slice(readyMarker + 2);
 
-      ////this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
+      //this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
       const pendingRead = this._pendingReads.shift();
-      //this.log(`CurrentRX: ${this._currentRx}`);
+      this.log(`CurrentRX: ${this._currentRx}`);
       pendingRead(this._currentRx);
   }
 
   _changeState(state) {
-    ////this.log(`Changing state to ${state}`);
+    //this.log(`Changing state to ${state}`);
 
     switch (state) {
       case TransportStates.CONNECTING:
@@ -167,11 +167,11 @@ class Transport extends EventEmitter {
   }
 
   _onConnecting() {
-    //this.log('Connecting to HDFury...');
+    this.log('Connecting to HDFury...');
   }
 
   _onConnected() {
-    //this.log('Connected to HDFury...');
+    this.log('Connected to HDFury...');
     this._backoff.reset();
 
     // TODO: Initiate connection check timer?
@@ -183,7 +183,7 @@ class Transport extends EventEmitter {
   }
 
   async _synchronize() {
-    this.log('Synchronizing with HDFury...');
+    serial('Synchronizing with projector...');
 
     let synchronized = false;
     for (let attempt = 0; attempt < 3 && synchronized === false; attempt++) {
@@ -195,8 +195,8 @@ class Transport extends EventEmitter {
       }
     }
 
+    //serial(`Synchronization completed... ${synchronized ? 'successful' : 'FAILED'}`);
     this.log(`Synchronization completed... ${synchronized ? 'successful' : 'FAILED'}`);
-    //this.log(`Synchronization completed... ${synchronized ? 'successful' : 'FAILED'}`);
     return synchronized;
   }
 
@@ -230,7 +230,7 @@ class Transport extends EventEmitter {
     try {
       const response = await this._execute('#get input \r', 1000);
 
-	  //this.log(`response = ${response}\r`);
+	  this.log(`response = ${response}\r`);
       if (response.includes('top') || response.includes('bottom')) {
       	return true;
       }
@@ -243,7 +243,7 @@ class Transport extends EventEmitter {
   }
 
   _onBackoffStarted(delay) {
-    //this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
+    this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
   }
 
   async _connect() {
