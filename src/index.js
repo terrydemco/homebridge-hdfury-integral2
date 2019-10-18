@@ -2,7 +2,7 @@
 
 const version = require('../package.json').version;
 const Transport = require('./Transport');
-const debug = require('debug')('ESCVP21');
+
 
 
 
@@ -24,7 +24,7 @@ module.exports = (homebridge) => {
 
 
 function mySwitch(log, config) {
-  debug = log;
+  this.log = log;
   this._device = new Transport("/dev/ttyUSB0", log);
 
 }
@@ -53,7 +53,7 @@ mySwitch.prototype = {
 	},
 	updatePowerState: async function() {
   	const powerState = await this._device.execute('#get input');
-	debug(`Powerstate = ${powerState}`);
+	this.log(`Powerstate = ${powerState}`);
 	
 	let state;
 	if (powerState.includes('top')) {
@@ -69,7 +69,7 @@ mySwitch.prototype = {
 	
 	getSwitchOnCharacteristic: async function (callback) {	
 	const powerState = await this._device.execute('#get input');
-	debug(`Powerstate = ${powerState}`);
+	this.log(`Powerstate = ${powerState}`);
 	
 	let state;
 	if (powerState.includes('top')) {
@@ -77,18 +77,18 @@ mySwitch.prototype = {
 	} else {
 		state = false;
 	}
-	debug(`getSwitchCharacteristic returning: ${state}`);
+	this.log(`getSwitchCharacteristic returning: ${state}`);
 	return callback(null, state);
 	},
 	setSwitchOnCharacteristic: async function (on, next) {
 	
-	    debug(`Set Integral2 top input source to ${on}`);
+	    this.log(`Set Integral2 top input source to ${on}`);
     try {
       const value = on === true ? 'top' : 'bot';
-      debug(`setting value::${value}`);
+      this.log(`setting value::${value}`);
       const cmd = `#set input ${value} \r`;
 
-      debug(`Sending ${cmd}`);
+      this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
       //await this.timeout(2000);
       //this.updatePowerState();
@@ -96,7 +96,7 @@ mySwitch.prototype = {
 
     }
     catch (e) {
-      debug(`Failed to set characteristic ${e}`);
+      this.log(`Failed to set characteristic ${e}`);
       next(e);
     }
     return next();

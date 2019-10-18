@@ -1,7 +1,7 @@
 'use strict';
 
-const debug = require('debug')('ESCVP21');
-const serial = require('debug')('ESCVP21:serial');
+const this.log = require('this.log')('ESCVP21');
+const serial = require('this.log')('ESCVP21:serial');
 
 const SerialPort = require('serialport');
 const EventEmitter = require('events').EventEmitter;
@@ -22,7 +22,7 @@ class Transport extends EventEmitter {
 
   constructor(port, log) {
     super();
-	debug = log;
+	this.log = log;
     this._currentRx = Buffer.alloc(0);
     this._pendingReads = [];
     this._command = 0;
@@ -57,21 +57,21 @@ class Transport extends EventEmitter {
   }
 
   _onSerialPortClosed(err) {
-    debug(`SignalPort closed: ${err}`);
+    this.log(`SignalPort closed: ${err}`);
     this._changeState(TransportStates.DISCONNECTED);
   }
 
   _onSerialPortFailed(err) {
-    debug(`SerialPort signaled error: ${err}`);
+    this.log(`SerialPort signaled error: ${err}`);
     this.emit('error', err);
   }
 
   _onSerialPortData(data) {
     data = Buffer.from(data);
-    debug(`SerialPort received ${JSON.stringify(data)}`);
+    this.log(`SerialPort received ${JSON.stringify(data)}`);
 
     this._currentRx = Buffer.concat([this._currentRx, data]);
-    debug(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
+    this.log(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
 
     // Verify if this a complete line
     //this._handlePendingData();
@@ -98,14 +98,14 @@ class Transport extends EventEmitter {
 
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
-        debug(`Begin processing command ${commandId} - attempt #${attempt}`);
+        this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
         //const timeoutPromise = this._createTimeout(timeout);
         //const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
 
 
         //response = await readPromise;
-        debug(`the current Rx is: ${this._currentRx}`);
+        this.log(`the current Rx is: ${this._currentRx}`);
         return this._currentRx;
       }
     });
@@ -138,19 +138,19 @@ class Transport extends EventEmitter {
   }
 
   _handlePendingData() {
-    //debug(`handlePendingData: ${this._currentRx}`);
+    //this.log(`handlePendingData: ${this._currentRx}`);
     //const readyMarker = this._currentRx.indexOf('\n');
     //const line = this._currentRx.slice(0, readyMarker + 2).toString('ascii');
     //this._currentRx = this._currentRx.slice(readyMarker + 2);
 
-      //debug(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
+      //this.log(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
       const pendingRead = this._pendingReads.shift();
-      debug(`CurrentRX: ${this._currentRx}`);
+      this.log(`CurrentRX: ${this._currentRx}`);
       pendingRead(this._currentRx);
   }
 
   _changeState(state) {
-    //debug(`Changing state to ${state}`);
+    //this.log(`Changing state to ${state}`);
 
     switch (state) {
       case TransportStates.CONNECTING:
@@ -167,18 +167,18 @@ class Transport extends EventEmitter {
   }
 
   _onConnecting() {
-    debug('Connecting to HDFury...');
+    this.log('Connecting to HDFury...');
   }
 
   _onConnected() {
-    debug('Connected to HDFury...');
+    this.log('Connected to HDFury...');
     this._backoff.reset();
 
     // TODO: Initiate connection check timer?
   }
 
   _onDisconnected() {
-    debug('Disconnected from HDFury...');
+    this.log('Disconnected from HDFury...');
     this._backoff.backoff();
   }
 
@@ -196,7 +196,7 @@ class Transport extends EventEmitter {
     }
 
     serial(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
-    debug(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
+    this.log(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
     return synchronized;
   }
 
@@ -230,7 +230,7 @@ class Transport extends EventEmitter {
     try {
       const response = await this._execute('#get input \r', 1000);
 
-	  debug(`response = ${response}\r`);
+	  this.log(`response = ${response}\r`);
       if (response === 'input top' || response === 'input bot' || response === 'top' || response === 'bot') {
       	return true;
       }
@@ -243,7 +243,7 @@ class Transport extends EventEmitter {
   }
 
   _onBackoffStarted(delay) {
-    debug(`Attempting to reconnect in ${delay / 1000} seconds.`);
+    this.log(`Attempting to reconnect in ${delay / 1000} seconds.`);
   }
 
   async _connect() {
