@@ -231,7 +231,7 @@ class Transport extends EventEmitter {
       const response = await this._execute('#get input \r', 1000);
 
 	  this.log(`response = ${response}\r`);
-      if (response === 'input top' || response === 'input bot' || response === 'top' || response === 'bot') {
+      if (response.includes('top') || response.includes('bottom')) {
       	return true;
       }
       return false;
