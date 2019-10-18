@@ -1,7 +1,7 @@
 'use strict';
 
-const this.log = require('this.log')('ESCVP21');
-const serial = require('this.log')('ESCVP21:serial');
+const debug = require('debug')('ESCVP21');
+const serial = require('debug')('ESCVP21:serial');
 
 const SerialPort = require('serialport');
 const EventEmitter = require('events').EventEmitter;
@@ -178,7 +178,7 @@ class Transport extends EventEmitter {
   }
 
   _onDisconnected() {
-    this.log('Disconnected from HDFury...');
+    debug('Disconnected from HDFury...');
     this._backoff.backoff();
   }
 
