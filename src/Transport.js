@@ -104,7 +104,7 @@ class Transport extends EventEmitter {
         await this._sendCommand(cmd);
 
         response = await Promise.race([readPromise, timeoutPromise]);
-       
+        this.log(`quick response: ${response}`);
       }
 
 
