@@ -52,7 +52,7 @@ mySwitch.prototype = {
 	},
 	updatePowerState: async function() {
   	const powerState = await this._device.execute('#get input');
-	//this.log(`Powerstate = ${powerState}`);
+	this.log(`Powerstate = ${powerState}`);
 	
 	let state;
 	if (powerState === 'input top' || powerState === 'top') {
@@ -76,7 +76,7 @@ mySwitch.prototype = {
     try {
       const value = on === true ? 'top' : 'bot';
       this.log(`setting value:: ${value}`);
-      const cmd = `#set input ${value}`;
+      const cmd = `#set input ${value}\r`;
 
       this.log(`Sending ${cmd}`);
       await this._device.execute(cmd);
