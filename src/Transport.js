@@ -99,8 +99,8 @@ class Transport extends EventEmitter {
       let response = null;
       for (let attempt = 0; response === null && attempt < 3; attempt++) {
         this.log(`Begin processing command ${commandId} - attempt #${attempt}`);
-        const timeoutPromise = this._createTimeout(timeout);
-        const readPromise = this._scheduleRead();
+        //const timeoutPromise = this._createTimeout(timeout);
+        //const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
 
 
