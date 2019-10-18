@@ -105,6 +105,7 @@ class Transport extends EventEmitter {
 
 
         //response = await readPromise;
+        this.log(`the current Rx is: ${this._currentRx}`);
         return this._currentRx;
       }
     });
