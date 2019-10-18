@@ -81,7 +81,7 @@ mySwitch.prototype = {
 	},
 	setSwitchOnCharacteristic: async function (on, next) {
 	
-	    this.log(`Set Integral2 top input source to ${on}`);
+	    //this.log(`Set Integral2 top input source to ${on}`);
     try {
       const value = on === true ? 'top' : 'bot';
       //this.log(`setting value::${value}`);
