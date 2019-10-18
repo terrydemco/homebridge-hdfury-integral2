@@ -127,8 +127,9 @@ class Transport extends EventEmitter {
         if (err) {
           reject(err);
         }
-
-        resolve();
+		setTimeout(() => {
+		        resolve();
+		}, 1000)
       });
     });
   }
