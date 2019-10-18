@@ -147,7 +147,7 @@ class Transport extends EventEmitter {
   }
 
   _handlePendingData() {
-  setTimeout(function(this){
+  setTimeout(() => {
     this.log(`handlePendingData: ${this._currentRx}`);
     const readyMarker = this._currentRx.indexOf('\n');
     const line = this._currentRx.slice(0, readyMarker + 2).toString('ascii');
