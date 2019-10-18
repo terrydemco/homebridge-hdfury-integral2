@@ -91,7 +91,7 @@ class Transport extends EventEmitter {
     return this._execute(cmd, timeout);
   }
 
-  _execute(cmd, timeout) {
+  async _execute(cmd, timeout) {
     return this._taskQueue.push(async () => {
       await this._drainAndFlush();
       const commandId = this._command++;
@@ -120,7 +120,7 @@ class Transport extends EventEmitter {
         }
 		setTimeout(() => {
 		        resolve();
-		}, 1000)
+		}, 200)
       });
     });
   }
