@@ -93,7 +93,7 @@ class Transport extends EventEmitter {
 
   _execute(cmd, timeout) {
     return this._taskQueue.push(async () => {
-      //await this._drainAndFlush();
+      await this._drainAndFlush();
       const commandId = this._command++;
 
       let response = null;
@@ -103,19 +103,10 @@ class Transport extends EventEmitter {
         const readPromise = this._scheduleRead();
         await this._sendCommand(cmd);
 
-        Promise.race([readPromise, timeoutPromise]).then((response)=> {
-        	this.log(`quick response: ${response}`);
-    		this.log(`Done processing command ${commandId}: response=${response}`);
-      if (response === null) {
-        throw new Error('Command execution timed out.');
-        //this._synchronize();
-      }
-      //if (response.startsWith('ERR\r:')) {
-      //  throw new Error('Unsupported command');
-      //}
 
-      return response;
-        });
+        response = await readPromise;
+        this.log(`response--> ${response}`);
+        return response;
       }
     });
   }
