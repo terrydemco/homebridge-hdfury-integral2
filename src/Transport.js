@@ -104,7 +104,7 @@ class Transport extends EventEmitter {
         await this._sendCommand(cmd);
 
 
-        response = await readPromise;
+        //response = await readPromise;
         return this._currentRx;
       }
     });
