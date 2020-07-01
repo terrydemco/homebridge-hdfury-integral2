@@ -31,15 +31,15 @@ function mySwitch(log, config) {
 mySwitch.prototype = {
 
 	getServices: function() {
-		 let informationService = new Service.AccessoryInformation();
+		 let informationService = new HOMEBRIDGE.Service.AccessoryInformation();
     informationService
-      .setCharacteristic(Characteristic.Manufacturer, "HDFury")
-      .setCharacteristic(Characteristic.Model, "Integral2")
-      .setCharacteristic(Characteristic.SerialNumber, "123-456-789");
+      .setCharacteristic(HOMEBRIDGE.Characteristic.Manufacturer, "HDFury")
+      .setCharacteristic(HOMEBRIDGE.Characteristic.Model, "Integral2")
+      .setCharacteristic(HOMEBRIDGE.Characteristic.SerialNumber, "123-456-789");
 
-    let switchService = new Service.Switch("HDMI Switch");
+    let switchService = new HOMEBRIDGE.Service.Switch("HDMI Switch");
     switchService
-      .getCharacteristic(Characteristic.On)
+      .getCharacteristic(HOMEBRIDGE.Characteristic.On)
       .on('get', this.getSwitchOnCharacteristic.bind(this))
       .on('set', this.setSwitchOnCharacteristic.bind(this));
 
@@ -61,7 +61,7 @@ mySwitch.prototype = {
 		state = false;
 	}
 	this.switchService
-        .getCharacteristic(Characteristic.On)
+        .getCharacteristic(HOMEBRIDGE.Characteristic.On)
         .updateValue(state);
         return state;
   	},
