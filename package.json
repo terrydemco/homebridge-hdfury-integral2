@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "eslint": "^4.18.0",
-    "npm-github-release": "^0.9.0"
+    "npm-github-release": "^6.0.4"
   },
   "repository": {
     "type": "git",
