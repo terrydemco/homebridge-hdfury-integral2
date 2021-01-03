@@ -15,7 +15,7 @@ In development
 
 After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
 
- ```sudo npm install -g terrydemco/homebridge-integral2 --unsafe-perm```
+ ```sudo npm install -g terrydemco/homebridge-integral2```
 
 ### Configuration
 
