@@ -33,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grover/homebridge-epson-projector-rs232.git"
+    "url": "git+https://github.com/terrydemco/homebridge-epson-projector-rs232.git"
   }
 }
