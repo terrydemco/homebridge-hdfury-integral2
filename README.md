@@ -15,7 +15,7 @@ In development
 
 After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
 
- ```sudo npm install -g terrydemco/homebridge-integral2```
+ ```sudo npm install -g homebridge-integral2```
 
 ### Configuration
 
