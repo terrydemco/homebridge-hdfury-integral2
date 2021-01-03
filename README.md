@@ -39,17 +39,7 @@ After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
 }
 ```
 
-The configuration of a projector consists of the platform name, a list of devices, the name of the projector and the port it 
-is connected to. The polling interval regulates how often the plugin should query the projector for the current status. Note that
-the default value is 60000 milliseconds. You can go as low as 1000 milliseconds if you require faster status updates in HomeKit. The projector will be polled with this frequency at all times, when it's powered on and powered off.
-
-## Hardware setup
-
-Unfortunately I'm not a hardware expert on setting this up. I've found the following configuration to work for me on a Raspberry Pi Zero W, however be aware that you might break stuff if electrons flow in unexpected amounts and directions. Also please be careful when working with electricity and electrical circuits. I will in no way take responsibility for your actions.
-
-You need a serial cable to connect the projector to a computer or a Raspberry Pi. A USB powered serial adapter might work for you, I've good experience with (real) FTDI chips.
-
-If you're creating your own solution for this, it is recommended that you use a MAX3232 IC to connect the projector with the Raspberry Pi for proper circuit protection to both devices.
+For testing purposes only
 
 ### Disable serial TTY on RPi
 
