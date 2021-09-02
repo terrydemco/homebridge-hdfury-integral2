@@ -79,7 +79,8 @@ class Transport extends EventEmitter {
 
   execute(cmd, timeout) {
     if (this.state !== TransportStates.CONNECTED) {
-      throw new Error('Not connected');
+      //throw new Error('Not connected');
+      this.log('Not Connected');
     }
 
     // Default timeout of 10s = 10000
