@@ -20,8 +20,7 @@
   "dependencies": {
     "backoff": "^2.5.0",
     "debug": "^3.1.0",
-    "sequential-task-queue": "^1.2.0",
-    "serialport": "9.2.0"
+    "sequential-task-queue": "^1.2.0"
   },
   "engines": {
     "node": ">=8.9.3",
