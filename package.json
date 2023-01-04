@@ -1,6 +1,6 @@
 {
   "name": "homebridge-epson-projector-rs232",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Homebridge integration for HDFury Integral2",
   "main": "src/index.js",
   "scripts": {
@@ -18,8 +18,6 @@
   "author": "Terry Demco",
   "license": "MIT",
   "dependencies": {
-    "backoff": "^2.5.0",
-    "sequential-task-queue": "^1.2.0"
   },
   "engines": {
     "node": ">=8.9.3",
