@@ -3,7 +3,7 @@
 const debug = require('debug')('ESCVP21');
 const serial = require('debug')('ESCVP21:serial');
 
-const SerialPort = require('serialport');
+const { SerialPort } = require('serialport');
 const EventEmitter = require('events').EventEmitter;
 
 const Backoff = require('backoff');
@@ -27,7 +27,8 @@ class Transport extends EventEmitter {
     this._pendingReads = [];
     this._command = 0;
 
-    this._port = new SerialPort(port, {
+    this._port = new SerialPort({
+      path: port,
       autoOpen: true,
       baudRate: 19200,
       dataBits: 8,
